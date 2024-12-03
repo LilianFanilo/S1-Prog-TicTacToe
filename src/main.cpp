@@ -1,6 +1,7 @@
 #include <iostream>
 #include <array>
 #include <conio.h>
+#include <cstdlib>
 
 struct Player
 {
@@ -39,7 +40,7 @@ void draw_game_board(std::array<char, 9>& game_board)
 
 }
 
-void play(struct Player& player , std::array<char, 9>& game_board)
+void player_move(struct Player& player , std::array<char, 9>& game_board)
 {
     int number {};
     while (!number > 0 && !number < 8)
@@ -60,23 +61,43 @@ void play(struct Player& player , std::array<char, 9>& game_board)
     
 }
 
-bool is_player_winning(std::array<char, 9>& game_board)
+void AI_move_easy(std::array<char, 9>& game_board)
 {
+    int random_number {};
+    int occupied_case {true};
+    while (occupied_case == true)
+    {
+        int random_number = rand() % 9;
+        if (game_board[random_number] == ' ')
+        {
+            occupied_case = false;
+            game_board[random_number] = 'O';
+        }
+    }
 
-    if (game_board[0] == 'X')
-    {
-        return true;
-    }
-    else
-    {
-        return false;
-    }
     
+}
 
+bool is_player_winning(struct Player& player , std::array<char, 9>& game_board)
+{
+    for (int i{0}; i<=2; i++)
+    {
+        if(game_board[0] == game_board[1] && game_board[1]==game_board[2] && game_board[0] == player.symbol)
+        {
+            std::cout << "Victoire de " << player.name << std::endl;
+            return true;
+        }
+        else 
+        {
+            return false;
+        }
+    }
 }
 
 int main()
 {   
+    srand (time(NULL));
+
     std::system("CLS");
 
     int game_mode {};
@@ -106,9 +127,10 @@ int main()
 
         draw_game_board(game_board);
 
-        while (is_player_winning(game_board) == false)
+        while (is_player_winning(player, game_board) == false)
         {
-            play(player, game_board);
+            player_move(player, game_board);
+            AI_move_easy(game_board);
             draw_game_board(game_board);
         }
         

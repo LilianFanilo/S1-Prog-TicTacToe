@@ -17,5 +17,5 @@ target_sources(${PROJECT_NAME} PRIVATE ${SOURCES})
 target_include_directories(${PROJECT_NAME} PRIVATE src lib)
 
 # Link the sil library into the project
-add_subdirectory(lib/sil)
-target_link_libraries(${PROJECT_NAME} PRIVATE sil)
+# add_subdirectory(lib/sil)
+# target_link_libraries(${PROJECT_NAME} PRIVATE sil)
