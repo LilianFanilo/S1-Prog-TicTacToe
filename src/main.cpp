@@ -39,34 +39,48 @@ void draw_game_board(std::array<char, 9>& game_board)
 
 }
 
-void play()
+void play(struct Player& player , std::array<char, 9>& game_board)
 {
-    std::cout << "Au tour du joueur 1, ecrivez le numero de la case a remplir (1-9):" << std::endl;
-    std::cout << std::endl ;
-
-    std::cout << "Tableau de reference" << std::endl;
-
-    for (int i = 0; i < 9; i++)
-    {   
-        std::cout << "| " << i + 1 << " " ;
-
-        if (i == 2 || i == 5 || i == 8)
+    int number {};
+    while (!number > 0 && !number < 8)
+    {
+        std::cout << "Entrez un nombre entre 1 et 9" << std::endl;
+        std::cin >> number;
+        number --;
+        if (game_board[number] == ' ')
         {
-            std::cout << "|" << std::endl;
+            game_board[number] = player.symbol;
+            break;
+        }
+        else
+        {
+            std::cout << "DEJA PRIS" << std::endl;
         }
     }
-
-    std::cout << std::endl ;
+    
 }
 
-void is_winning()
+bool is_player_winning(std::array<char, 9>& game_board)
 {
+
+    if (game_board[0] == 'X')
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
     
+
 }
 
 int main()
 {   
+    std::system("CLS");
+
     int game_mode {};
+    std::array<char, 9> game_board{' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '};
 
     std::cout << "Bienvenue dans le jeu du TicTacToe" << std::endl;
     std::cout << "Veuillez choisir un mode de jeu :" << std::endl ;
@@ -80,18 +94,25 @@ int main()
     {
         Player player;
         player.create_player();
+
+        Player player2;
+        player2.create_player();
+
     }
     else if (game_mode == 2)
     {
         Player player;
         player.create_player();
+
+        draw_game_board(game_board);
+
+        while (is_player_winning(game_board) == false)
+        {
+            play(player, game_board);
+            draw_game_board(game_board);
+        }
+        
     }
-
-    std::array<char, 9> game_board{' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '};
-
-    draw_game_board(game_board);
-    play();
-
     
-
+    return 0;
 }
