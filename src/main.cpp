@@ -2,7 +2,7 @@
 #include <array>
 #include <conio.h>
 #include <cstdlib>
-#include "./Player.cpp";
+#include "./Player.cpp"
 
 void draw_game_board(std::array<char, 9> &game_board)
 {
