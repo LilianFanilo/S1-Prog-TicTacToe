@@ -2,26 +2,7 @@
 #include <array>
 #include <conio.h>
 #include <cstdlib>
-
-struct Player
-{
-    std::string name{};
-    char symbol{"X" || "O"};
-
-    void create_player();
-};
-
-void Player::create_player()
-{
-    std::cout << "ENTRER VOTRE NOM :" << std::endl;
-    std::cin >> this->name;
-
-    std::cout << "CHOISISSEZ VOTRE SYMBOLE ( X ou O ) :" << std::endl;
-    std::cin >> this->symbol;
-
-    std::cout << "Nom du joueur : " << this->name << std::endl;
-    std::cout << "Symbole choisi : " << this->symbol << std::endl;
-};
+#include "./Player.cpp";
 
 void draw_game_board(std::array<char, 9> &game_board)
 {
