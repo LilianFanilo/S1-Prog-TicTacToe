@@ -19,3 +19,13 @@ target_include_directories(${PROJECT_NAME} PRIVATE src lib)
 # Link the sil library into the project
 # add_subdirectory(lib/sil)
 # target_link_libraries(${PROJECT_NAME} PRIVATE sil)
+
+include(FetchContent)
+FetchContent_Declare(
+    terminal_ctrl
+    GIT_REPOSITORY https://github.com/dsmtE/terminal_ctrl
+    GIT_TAG "origin/main"
+)
+
+FetchContent_MakeAvailable(terminal_ctrl)
+target_link_libraries(${PROJECT_NAME} PUBLIC terminal_ctrl)
